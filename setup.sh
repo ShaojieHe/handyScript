@@ -17,6 +17,7 @@ iptables -A INPUT -p tcp -j DROP
 systemctl enable iptables.service
 service iptables save
 yum install -y gcc
+yum -y groupinstall "Development Tools"
 cd ./libsodium-stable
 ./configure
 make && make install
