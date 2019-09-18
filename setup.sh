@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 yum install wget -y
-wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/ssr.sh
-wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/tcp.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/ssr.sh && chmod +x ssr.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/tcp.sh && chmod +x tcp.sh
 wget -N --no-check-certificate https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
 tar axvf LATEST.tar.gz
 yum update -y
@@ -16,3 +16,7 @@ iptables -A INPUT -p tcp --dport 2048 -j ACCEPT
 iptables -A INPUT -p tcp -j DROP
 systemctl enable iptables.service
 service iptables save
+yum install -y gcc
+cd ./libsodium-stable
+./configure
+make && make install
