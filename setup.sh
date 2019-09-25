@@ -13,7 +13,6 @@ iptables -A INPUT -p tcp --dport 21 -j ACCEPT
 iptables -A INPUT -p tcp --dport 20 -j ACCEPT
 iptables -A INPUT -p tcp --dport 1919 -j ACCEPT
 iptables -A INPUT -p tcp --dport 2048 -j ACCEPT
-iptables -A INPUT -p tcp -j DROP
 systemctl enable iptables.service
 service iptables save
 yum install -y gcc
