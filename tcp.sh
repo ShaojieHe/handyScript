@@ -40,7 +40,7 @@ installbbr(){
 		dpkg -i linux-image-${kernel_version}.deb
 		cd .. && rm -rf bbr
 	fi
-	detele_kernel
+	
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBR/BBR魔改版${Font_color_suffix}"
 	stty erase '^H' && read -p "需要重启VPS后，才能开启BBR/BBR魔改版，是否现在重启 ? [Y/n] :" yn
@@ -67,7 +67,7 @@ installbbrplus(){
 		dpkg -i linux-image-${kernel_version}.deb
 		cd .. && rm -rf bbrplus
 	fi
-	detele_kernel
+	
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBRplus${Font_color_suffix}"
 	stty erase '^H' && read -p "需要重启VPS后，才能开启BBRplus，是否现在重启 ? [Y/n] :" yn
@@ -93,7 +93,7 @@ installlot(){
 	elif [[ "${release}" == "debian" ]]; then
 		bash <(wget --no-check-certificate -qO- "http://${github}/Debian_Kernel.sh")
 	fi
-	detele_kernel
+	
 	BBR_grub
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}Lotserver${Font_color_suffix}"
 	stty erase '^H' && read -p "需要重启VPS后，才能开启Lotserver，是否现在重启 ? [Y/n] :" yn
