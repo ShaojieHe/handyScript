@@ -15,7 +15,7 @@ fi
 
 unset choice
 
-yum install openssh-server iptables-services
+yum install openssh-server -y
 
 cat /etc/selinux/config | sed 's/SELINUX=enforcing/SELINUX=disabled/g' > /etc/selinux/config.new
 mv /etc/selinux/config /etc/selinux/config.old
@@ -34,6 +34,7 @@ wget -N --no-check-certificate https://download.libsodium.org/libsodium/releases
 tar axvf LATEST.tar.gz
 
 
+yum install  iptables-services -y
 iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
 iptables -A OUTPUT -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
