@@ -24,8 +24,8 @@ mv /etc/selinux/config.new /etc/selinux/config
 read -p "***auto change ssh port to 2048?*** y/N" choice
 if [[ -z $choice || $choice != "y" || $choice != "Y" ]]; then
     cat /etc/ssh/sshd_config | sed 's/#Port 22/Port 2048/g' > /etc/ssh/sshd_config.new
-    mv /etc/sshd/sshd_config /etc/sshd/sshd_config.old
-    mv /etc/sshd/sshd_config.new /etc/sshd/sshd_config
+    mv /etc/ssh/sshd_config /etc/sshd/ssh_config.old
+    mv /etc/ssh/sshd_config.new /etc/ssh/sshd_config
     systemctl reload sshd
 fi
 
