@@ -47,6 +47,7 @@ iptables -A INPUT -p udp --dport 30000:40000 -j ACCEPT
 iptables -P INPUT DROP
 
 
+systemctl disable --now firewalld
 systemctl enable iptables.service
 service iptables save
 yum -y groupinstall "Development Tools"
