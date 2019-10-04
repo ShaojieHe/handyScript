@@ -440,6 +440,7 @@ detele_kernel(){
 
 #更新引导
 BBR_grub(){
+	grub_count=`grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version} | awk '{print $1}'`
 	if [[ "${release}" == "centos" ]]; then
         if [[ ${version} = "6" ]]; then
             if [ ! -f "/boot/grub/grub.conf" ]; then
@@ -452,7 +453,7 @@ BBR_grub(){
                 echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
                 exit 1
             fi
-            grub2-set-default 0
+            grub2-set-default ${grub_count}
         fi
     elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
         /usr/sbin/update-grub
