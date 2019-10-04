@@ -441,6 +441,7 @@ detele_kernel(){
 #更新引导
 BBR_grub(){
 	grub_count=`grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version} | awk '{print $1}'`
+	grub_count=$[grub_count-1]
 	if [[ "${release}" == "centos" ]]; then
         if [[ ${version} = "6" ]]; then
             if [ ! -f "/boot/grub/grub.conf" ]; then
