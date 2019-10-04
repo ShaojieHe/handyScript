@@ -80,6 +80,7 @@ installbbrplus(){
 
 #安装Lotserver内核
 installlot(){
+	kernel_version="3.10.0"
 	if [[ "${release}" == "centos" ]]; then
 		rpm --import http://${github}/lotserver/${release}/RPM-GPG-KEY-elrepo.org
 		yum remove -y kernel-firmware
@@ -442,23 +443,7 @@ detele_kernel(){
 BBR_grub(){
 	grub_count=`grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version} | awk '{print $1}'`
 	grub_count=$[grub_count-1]
-	if [[ "${release}" == "centos" ]]; then
-        if [[ ${version} = "6" ]]; then
-            if [ ! -f "/boot/grub/grub.conf" ]; then
-                echo -e "${Error} /boot/grub/grub.conf 找不到，请检查."
-                exit 1
-            fi
-            sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf
-        elif [[ ${version} = "7" ]]; then
-            if [ ! -f "/boot/grub2/grub.cfg" ]; then
-                echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
-                exit 1
-            fi
-            grub2-set-default ${grub_count}
-        fi
-    elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
-        /usr/sbin/update-grub
-    fi
+	grub2-set-default ${grub_count}
 }
 
 #############内核管理组件#############
