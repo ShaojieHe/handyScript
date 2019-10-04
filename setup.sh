@@ -55,10 +55,5 @@ first_time() {
     ./configure
     make && make install
 }
-
-if [[ -z $1]]; then
-echo "first_time to install"
-echo "grub_check to set boot up kernel"
-echo "grub_set to set boot up kernel"
-fi
+first_time
 
