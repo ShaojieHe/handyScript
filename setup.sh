@@ -5,6 +5,7 @@ first_time() {
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/tcp.sh && chmod +x tcp.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/v2ray.sh && chmod +x v2ray.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/reboot.sh && chmod +x reboot.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/kernel.sh && chmod +x kernel.sh
     mv reboot.sh .reboot.sh
 
     read -p "****do you want install ssr auto reboot?**** y/N" choice
