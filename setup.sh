@@ -19,15 +19,14 @@ first_time() {
 
     yum install openssh-server -y
 
-    cat /etc/selinux/config | sed 's/SELINUX=enforcing/SELINUX=disabled/g' >/etc/selinux/config.new
-    mv /etc/selinux/config /etc/selinux/config.old
-    mv /etc/selinux/config.new /etc/selinux/config
+    cp /etc/selinux/config /etc/selinux/config.old
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+    
 
     read -p "***auto change ssh port to 2048?*** y/N" choice
     if [[ -z $choice || $choice != "y" || $choice != "Y" ]]; then
-        cat /etc/ssh/sshd_config | sed 's/#Port 22/Port 2048/g' >/etc/ssh/sshd_config.new
-        mv /etc/ssh/sshd_config /etc/sshd/ssh_config.old
-        mv /etc/ssh/sshd_config.new /etc/ssh/sshd_config
+        cp /etc/ssh/sshd_config /etc/ssh/sshd_config.old
+        sed -i 's/#Port 22/Port 2048/g' /etc/ssh/sshd_config
         systemctl reload sshd
     fi
 
@@ -52,7 +51,7 @@ first_time() {
     systemctl enable iptables.service
     service iptables save
     yum -y groupinstall "Development Tools"
-    cd ./libsodium-stable
+    cd ./libsodium-stable || exit
     ./configure
     make && make install
 }

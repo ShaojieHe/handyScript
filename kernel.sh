@@ -1,6 +1,6 @@
 #!/bin/bash
 applygrub(){
-grub_count=`grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version} | awk '{print $1}'`
+grub_count=$(grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version} | awk '{print $1}')
 grub_count=$[grub_count-1]
 grub2-set-default ${grub_count}
 }
@@ -11,13 +11,13 @@ menu
 
 applykernel(){
 read -p "desired kernel?   " kernel_version
-kernel=`grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version}`
+kernel=$(grep -E ^menuentry /etc/grub2.cfg | cut -f 2 -d \' | nl | grep ${kernel_version})
 echo -e $kernel
 read -p  "this is your chosed kernel version, go?[y/N]   " choice
 [[ -z "${choice}" ]] && choice="n"
 if [[ $choice = "n" ]]; then
 menu
-elif [[ $choice=="y" || $choice=="Y" ]]; then
+elif [[ $choice == "y" || $choice == "Y" ]]; then
 applygrub
 exit
 fi
