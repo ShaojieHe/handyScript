@@ -41,3 +41,5 @@ iptables-restore < iptables.save
 rm -f iptables.save
 
 service iptables save
+
+bash <(curl -L -s https://install.direct/go.sh)
