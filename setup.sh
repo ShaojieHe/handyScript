@@ -4,18 +4,7 @@ first_time() {
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/ssr.sh && chmod +x ssr.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/tcp.sh && chmod +x tcp.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/v2ray.sh && chmod +x v2ray.sh
-    wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/reboot.sh && chmod +x reboot.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/kernel.sh && chmod +x kernel.sh
-    mv reboot.sh .reboot.sh
-
-    read -p "****do you want install ssr auto reboot?**** y/N" choice
-    if [[ -z $choice || $choice != "y" || $choice != "Y" ]]; then
-        echo "0 */2 * * * /bin/bash /root/.reboot.sh" >>./cron
-        crontab cron
-        rm -f cron
-    fi
-
-    unset choice
 
     yum install openssh-server -y
 
@@ -27,14 +16,14 @@ first_time() {
     if [[ -z $choice || $choice != "y" || $choice != "Y" ]]; then
         cp /etc/ssh/sshd_config /etc/ssh/sshd_config.old
         sed -i 's/#Port 22/Port 2048/g' /etc/ssh/sshd_config
-        systemctl reload sshd
     fi
 
     wget -N --no-check-certificate https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
 
     tar axvf LATEST.tar.gz
 
-    yum install iptables-services -y
+    yum install iptables iptables-services -y
+    
     iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
     iptables -A OUTPUT -j ACCEPT
     iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -54,6 +43,7 @@ first_time() {
     cd ./libsodium-stable || exit
     ./configure
     make && make install
+    systemctl reload sshd
 }
 first_time
 
