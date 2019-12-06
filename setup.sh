@@ -22,12 +22,6 @@ first_time() {
 
     tar axvf LATEST.tar.gz
 
-    yum install iptables iptables-services -y
-    wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/iptables.save
-    
-    iptables-restore < iptables.save
-    rm -f iptables.save
-    
     systemctl disable --now firewalld
     systemctl enable iptables.service
     service iptables save
@@ -36,6 +30,14 @@ first_time() {
     ./configure
     make && make install
     systemctl reload sshd
+    yum -y install epel-release
 }
 first_time
 
+yum install iptables iptables-services -y
+wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/iptables.save
+    
+iptables-restore < iptables.save
+rm -f iptables.save
+
+service iptables save
