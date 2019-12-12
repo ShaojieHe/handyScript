@@ -43,3 +43,7 @@ rm -f iptables.save
 service iptables save
 
 bash <(curl -L -s https://install.direct/go.sh)
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+timedatectl set-ntp true
