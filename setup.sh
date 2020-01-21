@@ -47,3 +47,7 @@ bash <(curl -L -s https://install.direct/go.sh)
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 timedatectl set-ntp true
+
+wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+
+chmod +x speedtest-cli
