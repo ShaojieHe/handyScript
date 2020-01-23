@@ -51,3 +51,8 @@ timedatectl set-ntp true
 wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
 
 chmod +x speedtest-cli
+
+https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+
+sudo yum --enablerepo=elrepo-kernel makecache
+
