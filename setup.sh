@@ -52,7 +52,9 @@ wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/mast
 
 chmod +x speedtest-cli
 
-https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 
-sudo yum --enablerepo=elrepo-kernel makecache
+yum --enablerepo=elrepo-kernel makecache -y
+
+yum-config-manager --enable elrepo-kernel -y
 
