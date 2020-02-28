@@ -54,6 +54,10 @@ chmod +x speedtest-cli
 
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 
+yum -y install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
+
+yum -y install yum-utils
+
 yum --enablerepo=elrepo-kernel makecache -y
 
 yum-config-manager --enable elrepo-kernel -y
