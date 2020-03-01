@@ -57,5 +57,11 @@ wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/mast
 
 chmod +x speedtest-cli
 
+yum -y install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
 
+yum -y install yum-utils
+
+yum --enablerepo=elrepo-kernel makecache -y
+
+yum-config-manager --enable elrepo-kernel -y
 
