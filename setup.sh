@@ -31,6 +31,11 @@ first_time() {
     make && make install
     systemctl reload sshd
     yum -y install epel-release
+    yum -y install yum-utils
+    rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+    yum -y install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
+    yum --enablerepo=elrepo-kernel makecache -y
+    yum-config-manager --enable elrepo-kernel -y
 }
 first_time
 
@@ -52,9 +57,5 @@ wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/mast
 
 chmod +x speedtest-cli
 
-rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 
-yum --enablerepo=elrepo-kernel makecache -y
-
-yum-config-manager --enable elrepo-kernel -y
 
