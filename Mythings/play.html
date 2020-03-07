@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>Click to Play</title>
+  </head>
+  <body>
+  <div>
+    <label for="addr">地址?：</label>
+    <input class="addr" id="addr" type="text" placeholder="https://ftp.qwq.es/file/video/xd.mp4">
+  </div>
+   <div> 
+    <label for="video">视频</label>
+    <input id="video" type="radio" value="video" name="type" checked>
+    <label for="live">直播</label>
+    <input id="live" type="radio" value="live" name="type">
+  </div>
+  <div>
+    <link rel="stylesheet" href="https://ftp.qwq.es/play/node_modules/dplayer/dist/DPlayer.min.css" />
+    <div id="dplayer"></div>
+    <script src="https://ftp.qwq.es/play/node_modules/dplayer/dist/DPlayer.min.js"></script>
+    <script src="https://ftp.qwq.es/play/hls.min.js"></script>
+    <script src="https://ftp.qwq.es/play/work.js"></script>
+    <button onclick="toplay()">Click to Play</button>
+  </div>
+  </body>
+</html>

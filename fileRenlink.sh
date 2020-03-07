@@ -17,7 +17,7 @@ do
     file_name=${file_name##*\/}
     if [[ ${file_operations} == "CREATE" ]]; then
     {
-        echo $old
+        echo "$old"
         rm -f "${Desdir}"/"${old}"
         echo Linked new file
         ln -f "${Srcdir}"/"${file_name}" "${Desdir}"/"new_${file_name}" > /dev/null 2>&1
