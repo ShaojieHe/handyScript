@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>Click to Play</title>
+  </head>
+  <body>
+  <div>
+    <label>参阅 https://live.qwq.es</label>
+    <label for="addr">地址?：</label>
+    <input class="addr" id="addr" type="text" size="40" placeholder="http://live.qwq.es/hls/hsj/index.m3u8">
+  </div>
+   <div> 
+     <input id="hls" type="radio" value="hls" name="type" checked>
+     <label for="video">hls(推荐https+ffplayer)</label>
+     <input id="flv" type="radio" value="fiv" name="type">
+    <label for="live">flv(仅限http)</label>
+    <input id="dash" type="radio" value="dash" name="type">
+    <label for="live">dash(推荐https+网页端)</label>
+    <input id="rtmp" type="radio" value="rtmp" name="type">
+    <label for="live">Just rtmp(Require Flash)</label>
+  </div>
+  <div>
+    <link rel="stylesheet" href="https://live.qwq.es/play/DPlayer.min.css" />
+    <div id="dplayer"></div>
+    
+    <script src="https://live.qwq.es/play/DPlayer.min.js" ></script>
+    <script src="https://live.qwq.es/play/hls.min.js" ></script>
+    <script src="https://live.qwq.es/play/flv.min.js" ></script>
+    <script src="https://live.qwq.es/play/playshaka-player.compiled.js" ></script>
+    <link href="https://live.qwq.es/play/video.js/video-js.css" rel="stylesheet" />
+    <script src="https://live.qwq.es/play/video.js/video.min.js" ></script>
+    <script src="https://live.qwq.es/play/video.js/videojs-flash.min.js" ></script>
+    <script src="https://live.qwq.es/play/worklive.js" ></script>
+    
+    <button onclick="toplay()">Click to Play</button>
+    <button class="btn" onclick="todestory()">Destroy</button>
+    <br />
+    <br />
+    <div id="videojs"></div>
+  </div>
+  </body>
+</html>

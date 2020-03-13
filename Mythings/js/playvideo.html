@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>Click to Play Video</title>
+  </head>
+  <body>
+  <div>
+    <label> 本页面仅能播放视频 </label>
+    <label for="addr">地址?：</label>
+    <input class="addr" id="addr" type="text" placeholder="https://ftp.qwq.es/share/test.mp4">
+  </div>
+  <div>
+    <link rel="stylesheet" href="https://ftp.qwq.es/play/DPlayer.min.css" />
+    <div id="dplayer"></div>
+    <script src="https://ftp.qwq.es/play/DPlayer.min.js"></script>
+    <script src="https://ftp.qwq.es/play/hls.min.js"></script>
+    <div id="dplayer"></div>
+    <script src="https://ftp.qwq.es/play/workvideo.js"></script>
+    <button onclick="toplay()">Click to Play</button>
+    <button class="btn" onclick="dp.destroy()">DP Destroy</button>
+  </div>
+  </body>
+</html>
