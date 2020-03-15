@@ -12,13 +12,13 @@ countfile=0
 while read line ; 
 do    
     if [[ "${line: -1}" == '/' ]]; then
-        echo $line >> dirURL
-        let countdir++
+        echo "$line" >> dirURL
+        (( countdir++ ))
     else
-        echo $line >> fileURL
-        let countfile++
+        echo "$line" >> fileURL
+        (( countfile++ ))
     fi
-done < $1
+done < "$1"
 echo this pass got $countdir dirURL
 echo this pass got $countfile fileURL
 }
@@ -29,14 +29,14 @@ while /bin/true
 do {
     isdir "./inputURL"
     rm -f ./inputURL
-    (( $i < $depth )) || break
+    (( i < depth )) || break
     while read line; do
-        echo '------------ 正在处理 -----------'
-        echo ${line}
+        echo '------- processing line --------'
+        echo "${line}"
         echo '------- --------------- --------'
         ${cmd} "${line}" | sed '1d' >> ./inputURL
     done < ./dirURL
     echo $i 'pass'
     rm -f ./dirURL
-    let i++
+    (( i++ ))
 }; done
