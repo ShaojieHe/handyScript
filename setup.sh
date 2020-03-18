@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 first_time() {
+    username=''
+    usermod -aG wheel "${username}"
     yum install wget -y
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/ssr.sh && chmod +x ssr.sh
     wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handyScript/master/tcp.sh && chmod +x tcp.sh
@@ -64,4 +66,18 @@ yum -y install yum-utils
 yum --enablerepo=elrepo-kernel makecache -y
 
 yum-config-manager --enable elrepo-kernel -y
+
+wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+
+sh install.sh --unattended
+
+rm -f install.sh
+
+curl https://mimosa-pudica.net/src/incr-0.2.zsh > ~/.oh-my-zsh/custom/incr-02.zsh
+
+sed -i -e 's/ZSH_THEME\=\"robbyrussell\"/ZSH_THEME\=\"ys\"/g' -e 's/\(git\)/sudo git extract z/' ~/.zshrc
+
+echo 'source ~/.oh-my-zsh/custom/incr*.zsh' >> ~/.zshrc
+
+
 
