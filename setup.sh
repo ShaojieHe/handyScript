@@ -64,6 +64,8 @@ yum --enablerepo=elrepo-kernel makecache -y
 
 yum-config-manager --enable elrepo-kernel -y
 
+yum install -y zsh
+
 wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
 sh install.sh --unattended

@@ -5,7 +5,12 @@ depth=2
 #conf lynx
 cmd="lynx --listonly --nonumbers --dump --auth xxx:xxx -unique_urls "
 #conf url
-url=''
+url="$1"
+
+if [ -z $1 ]; then
+    echo Usage: $0 \'URL here\'
+    exit 1
+fi
 
 urldecode() {
     local urls
@@ -15,7 +20,8 @@ urldecode() {
 }
 
 init_url=$(urldecode ${url})
-echo $init_url
+echo Now Running at $init_url
+echo At ${depth} Depth
 
 isdir() {
 countdir=0
@@ -31,7 +37,7 @@ do
             (( countdir++ ))
         else
             #intend for aria2c (-d 指定文件夹) 你可以用xargs(parallel)直接构建完整的aria2下载指令
-            echo " -d "\"${targetDir:-./}\"" "\"${line}\""" >> bashedURL
+            echo "-d "\"${targetDir:-./}\"" "\"${line}\""" >> bashedURL
             echo "$line" >> fileURL
             (( countfile++ ))
         fi
@@ -50,7 +56,7 @@ while :
 do {
     isdir "./inputURL"
     rm -f ./inputURL
-    if [ ! -f ./dirURL ]; then exit 0 ;fi
+    if [ ! -f ./dirURL ]; then echo Already got all files,Exiting!; exit 0 ;fi
     (( i < depth )) || break
     while read line; do
         echo '------- Processing URL  --------'
@@ -60,7 +66,7 @@ do {
         #现在远程文件夹的具体位置
         echo $(urldecode ${line//${url}/./}) >> ./inputURL
         #输出实际上的内容
-        ${cmd} "${line}" | sed '1d' >> ./inputURL
+        ${cmd} "${line}" | sed '1d' | grep ${url} >> ./inputURL
     done < ./dirURL
     echo $i 'Pass'
     rm -f ./dirURL
