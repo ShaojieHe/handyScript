@@ -79,5 +79,4 @@ sed -i -e 's/ZSH_THEME\=\"robbyrussell\"/ZSH_THEME\=\"ys\"/g' -e 's/\(git\)/sudo
 
 echo 'source ~/.oh-my-zsh/custom/incr*.zsh' >> ~/.zshrc
 
-
-
+yum install -y mosh
