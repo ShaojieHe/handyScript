@@ -48,6 +48,7 @@ echo this pass got $countfile fileURL
 echo
 }
 
+cd "$PWD" || exit 0
 i=0
 rm -f fileURL dirURL inputURL bashedURL
 $cmd "$url" | sed -e '1d' > ./inputURL
