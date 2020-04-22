@@ -1,16 +1,26 @@
 #!/bin/bash
 type lynx > /dev/null || exit 1
+type aria2c > /dev/null || exit 1
 #set depth
 depth=2
 #conf lynx
 cmd="lynx --listonly --nonumbers --dump --auth xxx:xxx -unique_urls "
+#conf aria2c
+aria2_args="-s20 -k1M -x16"
 #conf url
 url="$1"
 
-if [ -z $1 ]; then
-    echo Usage: $0 \'URL here\'
+if [ -z "$1" ]; then
+    echo Usage: "$0" \'URL here\'
     exit 1
 fi
+
+getdir(){
+    local mid
+    mid="${1%*/}"
+    echo "${mid##*/}"
+    unset mid
+}
 
 urldecode() {
     local urls
@@ -19,8 +29,8 @@ urldecode() {
     printf %b "${urls//'%'/\\x}"
 }
 
-init_url=$(urldecode ${url})
-echo Now Running at $init_url
+init_url=$(urldecode "${url}")
+echo Now Running at "$init_url"
 echo At ${depth} Depth
 
 isdir() {
@@ -37,7 +47,7 @@ do
             (( countdir++ ))
         else
             #intend for aria2c (-d 指定文件夹) 你可以用xargs(parallel)直接构建完整的aria2下载指令
-            echo "-d "\"${targetDir:-./}\"" "\"${line}\""" >> bashedURL
+            echo "aria2c  "${aria2_args}"  -d "\"${targetDir:-./}\"" "\"${line}\""" >> bashedURL
             echo "$line" >> fileURL
             (( countfile++ ))
         fi
@@ -49,10 +59,32 @@ echo
 }
 
 cd "$PWD" || exit 0
-i=0
-rm -f fileURL dirURL inputURL bashedURL
-$cmd "$url" | sed -e '1d' > ./inputURL
+currentDir="$(urldecode "$(getdir "${init_url}")")"
+if [ ! -e ./"${currentDir}" ]; then
+        mkdir "${currentDir}"
+        echo "正在创建最上层目录~"
+        cd "${currentDir}" || exit 0
+    else
+        cd "${currentDir}" || exit 0
+        echo "最上层目录已经存在~"
+fi
 
+
+if [[ -e bashedURL || -e fileURL ]]; then
+    read -p '即将删除上次的结果 要继续mua? [y/N] ' result
+    if [[ ${result} == 'y' || ${result} == 'Y' ]]; then
+            rm -f fileURL dirURL inputURL bashedURL
+        elif [[ ${result:=N} == 'N' || ${result:=N} == 'n' ]]; then 
+            echo '正在退出喵~'
+            exit 0
+        else
+            echo '正在退出喵~'
+            exit 0
+    fi
+fi
+
+$cmd "$url" | sed -e '1d' > ./inputURL
+i=0
 while :
 do {
     isdir "./inputURL"
@@ -65,9 +97,9 @@ do {
         echo
         echo '------- --------------- --------'
         #现在远程文件夹的具体位置
-        echo $(urldecode ${line//${url}/./}) >> ./inputURL
+        echo "$(urldecode "${line//${url}/./}")" >> ./inputURL
         #输出实际上的内容
-        ${cmd} "${line}" | sed '1d' | grep ${url} >> ./inputURL
+        ${cmd} "${line}" | sed '1d' | grep "${url}" >> ./inputURL
     done < ./dirURL
     echo $i 'Pass'
     rm -f ./dirURL
