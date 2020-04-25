@@ -8,13 +8,19 @@
   <div>
     <label> 本页面仅能播放视频 </label>
     <label for="addr">地址?：</label>
-    <input class="addr" id="addr" type="text" placeholder="https://ftp.qwq.es/share/test.mp4">
+    <input class="addr" id="addr" type="text" size="50" placeholder="https://ftp.qwq.es/share/test.mp4">
+       <div> 
+     <input id="normal" type="radio" value="normal" name="type" checked>
+     <label for="normal">normal</label>
+     <input id="dash" type="radio" value="dash" name="type">
+    <label for="dash">dash</label>
+  </div>
   </div>
   <div>
     <link rel="stylesheet" href="https://ftp.qwq.es/play/DPlayer.min.css" />
     <div id="dplayer"></div>
+    <script src="https://live.qwq.es/play/playshaka-player.compiled.js" ></script>
     <script src="https://ftp.qwq.es/play/DPlayer.min.js"></script>
-    <script src="https://ftp.qwq.es/play/hls.min.js"></script>
     <div id="dplayer"></div>
     <script src="https://ftp.qwq.es/play/workvideo.js"></script>
     <button onclick="toplay()">Click to Play</button>
