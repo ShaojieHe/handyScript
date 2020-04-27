@@ -46,7 +46,7 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/ShaojieHe/handy
     
 iptables-restore < iptables.save
 
-service iptables save
+iptables-save > /etc/sysconfig/iptables
 
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -81,3 +81,9 @@ echo 'source ~/.oh-my-zsh/custom/incr*.zsh' >> ~/.zshrc
 yum install -y mosh
 
 yum install -y lrzsz
+
+yum install -y haveged
+
+haveged
+
+systemctl enable haveged --now
