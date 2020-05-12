@@ -16,3 +16,4 @@ curl --insecure -X PUT "https://api.godaddy.com/v1/domains/${DOMAIN_NAME}/record
 getip
 echo Now Pointing to $IP
 postDomain "$IP"
+echo "Domain updated on" `date` >> /root/domainLogs

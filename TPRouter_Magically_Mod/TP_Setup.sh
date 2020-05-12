@@ -1,7 +1,9 @@
+#You can modify /tmp/userconfig that can keep your changes
+#and rc.local this setup script to create env
 #FOR WAR-1200L
 echo 'Begin xD'
 
-#(optional)
+#use /etc/shadow and /etc/passwd add youself in before using this!
 #passwd -l root
 
 mkdir /tmp/userconfig/root
