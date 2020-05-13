@@ -36,5 +36,9 @@ opkg install screen
 cp /tmp/userconfig/root/DDNS.sh /root/DDNS.sh
 sh /root/DDNS.sh
 
-echo "*/3 * * * * /bin/sh /root/DDNS.sh" | crontab -
-/usr/sbin/crond -b -c /etc/crontabs -l 8
+echo "*/3 * * * * /bin/sh /root/DDNS.sh -4" | crontab -
+
+ps | grep [c]rond
+if [ $? != '0' ]; then
+    /usr/sbin/crond -b -c /etc/crontabs -l 8
+fi
