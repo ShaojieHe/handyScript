@@ -6,7 +6,7 @@ depth=2
 #conf lynx
 cmd="lynx --listonly --nonumbers --dump --auth xxx:xxx -unique_urls "
 #conf aria2c
-aria2_args="-s20 -k1M -x16"
+aria2_args="--no-conf -s20 -k1M -x16"
 #conf url
 url="$1"
 
