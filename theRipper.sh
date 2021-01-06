@@ -4,7 +4,8 @@ type aria2c > /dev/null || exit 1
 #set depth
 depth=2
 #conf lynx
-cmd="lynx --listonly --nonumbers --dump --auth xxx:xxx -unique_urls "
+#如果运行不正常请手动删除-list_decoded(Lynx version<2.9.0dev)
+cmd="lynx --listonly --nonumbers --dump --auth xxx:xxx -unique_urls -list-decoded "
 #conf aria2c
 aria2_args="--no-conf -s20 -k1M -x16"
 #conf url
@@ -42,7 +43,7 @@ do
     if [[ "${line: 0 : 2}" == './' ]]; then
     targetDir=$line
     else
-        if [[ "${line: -1}" == '/' ]]; then
+        if [[ "${line:0-1:1}" == '/' ]]; then
             echo "$line" >> dirURL
             (( countdir++ ))
         else
